@@ -43,7 +43,7 @@ public class ClientResponse {
     }
 
     public String getBodyAsString() {
-        return new String(body, StandardCharsets.UTF_8);
+        return body == null ? "" : new String(body, StandardCharsets.UTF_8);
     }
 
     public Map<String, String> getHeaders() {

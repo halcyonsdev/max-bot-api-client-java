@@ -88,7 +88,11 @@ public class MaxQuery<T> {
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             if (c == '{') {
-                i = pathTemplate.indexOf('}', i);
+                int closing = pathTemplate.indexOf('}', i);
+                if (closing == -1) {
+                    throw new IllegalArgumentException("Malformed path template: unclosed '{' at index " + i + " in \"" + pathTemplate + "\"");
+                }
+                i = closing;
                 sb.append(substitutions[nextSubst++]);
                 continue;
             }
